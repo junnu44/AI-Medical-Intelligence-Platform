@@ -1,0 +1,6 @@
+2026-07-23 19:54:33 | INFO     | medical_ai | ============================================================
+2026-07-23 19:54:33 | INFO     | medical_ai | Starting Advanced AI Medical Intelligence Platform v2.0.0
+2026-07-23 19:54:33 | INFO     | medical_ai | ============================================================
+2026-07-23 19:54:33 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
+2026-07-23 19:54:33 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
+2026-07-23 19:54:33 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
