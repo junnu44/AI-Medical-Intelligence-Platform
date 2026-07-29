@@ -4,7 +4,7 @@ SQLAlchemy ORM models for the prediction_history table.
 
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, Float, Integer, String
+from sqlalchemy import DateTime, Float, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.app.database.database import Base
@@ -26,6 +26,17 @@ class PredictionHistory(Base):
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
+    )
+
+    # ── Day 3 additions ──────────────────────────────────────────────
+    gradcam_path: Mapped[str | None] = mapped_column(String(500), nullable=True, default=None)
+    overlay_path: Mapped[str | None] = mapped_column(String(500), nullable=True, default=None)
+    llm_report: Mapped[str | None] = mapped_column(Text, nullable=True, default=None)
+    updated_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
+        default=None,
+        onupdate=lambda: datetime.now(timezone.utc),
     )
 
     def __repr__(self) -> str:

@@ -4,3 +4,24 @@
 2026-07-23 19:54:33 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
 2026-07-23 19:54:33 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
 2026-07-23 19:54:33 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
+2026-07-24 19:32:56 | INFO     | medical_ai | GeminiService configured (model=gemini-2.5-flash, key=***5ftg)
+2026-07-24 19:32:56 | INFO     | medical_ai | ============================================================
+2026-07-24 19:32:56 | INFO     | medical_ai | Starting Advanced AI Medical Intelligence Platform v3.0.0
+2026-07-24 19:32:56 | INFO     | medical_ai | ============================================================
+2026-07-24 19:32:56 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
+2026-07-24 19:32:56 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
+2026-07-24 19:32:56 | INFO     | medical_ai | Generated directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated
+2026-07-24 19:32:56 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
+2026-07-24 19:35:11 | INFO     | medical_ai | GeminiService configured (model=gemini-2.5-flash, key=***5ftg)
+2026-07-24 19:35:11 | INFO     | medical_ai | ============================================================
+2026-07-24 19:35:11 | INFO     | medical_ai | Starting Advanced AI Medical Intelligence Platform v3.0.0
+2026-07-24 19:35:11 | INFO     | medical_ai | ============================================================
+2026-07-24 19:35:11 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
+2026-07-24 19:35:11 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
+2026-07-24 19:35:11 | INFO     | medical_ai | Generated directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated
+2026-07-24 19:35:11 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
+2026-07-24 19:35:12 | INFO     | medical_ai | Loaded checkpoint (epoch=9, best_val_acc=0.9368)
+2026-07-24 19:35:12 | INFO     | medical_ai | Model loaded successfully on [cpu] in 0.459 seconds
+2026-07-24 19:35:12 | INFO     | medical_ai | Gemini API key detected: ***5ftg
+2026-07-24 19:35:12 | INFO     | medical_ai | Application startup complete.
+2026-07-24 19:50:04 | INFO     | medical_ai | Application shutdown.

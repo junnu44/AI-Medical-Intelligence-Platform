@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     # ── Uploads ──────────────────────────────────────────────────────
     UPLOAD_FOLDER: str = "backend/app/uploads"
 
+    # ── Generated Output (Grad-CAM heatmaps + overlays) ──────────────
+    GENERATED_FOLDER: str = "backend/app/generated"
+
+    # ── LLM (Gemini) ────────────────────────────────────────────────
+    GEMINI_API_KEY: str = ""
+
     # ── Limits ───────────────────────────────────────────────────────
     MAX_UPLOAD_SIZE: int = 10 * 1024 * 1024  # 10 MB
 
@@ -41,9 +47,10 @@ class Settings(BaseSettings):
     APP_TITLE: str = "Advanced AI Medical Intelligence Platform"
     APP_DESCRIPTION: str = (
         "Production-ready API for Chest X-ray Pneumonia Detection "
-        "powered by DenseNet121 deep learning."
+        "powered by DenseNet121 deep learning with Grad-CAM explainability "
+        "and Gemini-powered medical report generation."
     )
-    APP_VERSION: str = "2.0.0"
+    APP_VERSION: str = "3.0.0"
 
     @property
     def resolved_model_path(self) -> Path:
@@ -60,6 +67,14 @@ class Settings(BaseSettings):
         if upload_path.is_absolute():
             return upload_path
         return self.PROJECT_ROOT / upload_path
+
+    @property
+    def resolved_generated_folder(self) -> Path:
+        """Return the absolute path to the generated output directory."""
+        gen_path = Path(self.GENERATED_FOLDER)
+        if gen_path.is_absolute():
+            return gen_path
+        return self.PROJECT_ROOT / gen_path
 
     model_config = {
         "env_file": ".env",

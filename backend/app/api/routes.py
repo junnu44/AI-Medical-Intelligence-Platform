@@ -1,14 +1,17 @@
 """
 API route definitions.
 
-Provides REST endpoints for health checks, chest X-ray prediction,
-and prediction history management (CRUD).
+Provides REST endpoints for health checks, chest X-ray prediction
+with Grad-CAM explainability and AI report generation,
+prediction history management (CRUD), report retrieval, and
+Grad-CAM image serving.
 """
 
 import uuid
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
 from backend.app.core.config import settings
@@ -18,11 +21,16 @@ from backend.app.database.models import PredictionHistory
 from backend.app.database.schemas import (
     DeleteResponse,
     ErrorResponse,
+    GradCAMResponse,
     HealthResponse,
     PredictionHistoryResponse,
     PredictionResponse,
+    ReportResponse,
 )
 from backend.app.services.predictor import predictor
+from backend.app.xai.gradcam_service import GradCAMService
+from backend.app.xai.heatmap import heatmap_renderer
+from backend.app.llm.gemini_service import gemini_service
 
 router = APIRouter()
 
@@ -74,11 +82,16 @@ async def predict(
     db: Session = Depends(get_db),
 ) -> PredictionResponse:
     """
-    Accept a chest X-ray image and return the prediction result.
+    Accept a chest X-ray image and return the prediction result
+    with Grad-CAM explainability and an AI-generated medical report.
 
-    Validates the uploaded image, stores it with a UUID filename,
-    runs DenseNet121 inference, persists the result to the database,
-    and returns the prediction with confidence score.
+    Pipeline:
+    1. Validate and save the uploaded image.
+    2. Run DenseNet121 inference.
+    3. Generate Grad-CAM heatmap and overlay.
+    4. Generate AI medical report via Gemini.
+    5. Persist all results to the database.
+    6. Return the enriched response.
     """
     logger.info(
         "POST /predict — patient=%s, age=%d, gender=%s, file=%s",
@@ -128,6 +141,59 @@ async def predict(
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
+    # ── Grad-CAM generation ──────────────────────────────────────
+    gradcam_path_str: str | None = None
+    overlay_path_str: str | None = None
+    gradcam_url: str | None = None
+    overlay_url: str | None = None
+
+    try:
+        if predictor.model is not None:
+            predicted_idx = settings.CLASSES.index(result.prediction)
+            gradcam_svc = GradCAMService(
+                model=predictor.model,
+                device=predictor.device,
+            )
+            cam_array = gradcam_svc.generate(
+                image_path=file_path,
+                predicted_class_idx=predicted_idx,
+            )
+
+            if cam_array is not None:
+                heatmap_path = heatmap_renderer.save_heatmap(cam_array)
+                overlay_path = heatmap_renderer.save_overlay(cam_array, file_path)
+
+                gradcam_path_str = str(heatmap_path)
+                overlay_path_str = str(overlay_path)
+
+                # Build URL paths for frontend consumption
+                gradcam_url = f"/generated/heatmaps/{heatmap_path.name}"
+                overlay_url = f"/generated/overlays/{overlay_path.name}"
+
+                logger.info(
+                    "Grad-CAM artifacts saved: heatmap=%s, overlay=%s",
+                    heatmap_path.name,
+                    overlay_path.name,
+                )
+    except Exception as exc:
+        logger.error("Grad-CAM pipeline failed: %s", exc, exc_info=True)
+
+    # ── Gemini report generation ─────────────────────────────────
+    llm_report: str | None = None
+
+    try:
+        report = gemini_service.generate_report(
+            prediction=result.prediction,
+            confidence=result.confidence,
+            patient_name=patient_name,
+            age=age,
+            gender=gender,
+        )
+        llm_report = report if report else "report_generation_failed"
+    except Exception as exc:
+        logger.error("Gemini pipeline failed: %s", exc, exc_info=True)
+        llm_report = "report_generation_failed"
+
     # ── Persist to database ──────────────────────────────────────
     record = PredictionHistory(
         patient_name=patient_name,
@@ -136,6 +202,9 @@ async def predict(
         image_path=str(file_path),
         prediction=result.prediction,
         confidence=result.confidence,
+        gradcam_path=gradcam_path_str,
+        overlay_path=overlay_path_str,
+        llm_report=llm_report,
     )
     db.add(record)
     db.commit()
@@ -150,7 +219,107 @@ async def predict(
         age=record.age,
         gender=record.gender,
         image_path=record.image_path,
+        gradcam_image=gradcam_url,
+        overlay_image=overlay_url,
+        llm_report=llm_report,
         created_at=record.created_at,
+    )
+
+
+# ── Report Endpoint ──────────────────────────────────────────────────
+
+
+@router.get(
+    "/report/{record_id}",
+    summary="Get AI-Generated Medical Report",
+    response_model=ReportResponse,
+    responses={404: {"model": ErrorResponse}},
+    tags=["Reports"],
+)
+def get_report(
+    record_id: int,
+    db: Session = Depends(get_db),
+) -> ReportResponse:
+    """
+    Return the stored AI-generated medical report for a prediction.
+
+    Returns the report text along with prediction metadata.
+    If the prediction exists but no report was generated, the
+    ``llm_report`` field will be ``None`` or ``"report_generation_failed"``.
+    """
+    logger.info("GET /report/%d", record_id)
+    record = (
+        db.query(PredictionHistory)
+        .filter(PredictionHistory.id == record_id)
+        .first()
+    )
+    if record is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Prediction record {record_id} not found.",
+        )
+
+    return ReportResponse(
+        prediction_id=record.id,
+        patient_name=record.patient_name,
+        prediction=record.prediction,
+        confidence=record.confidence,
+        llm_report=record.llm_report,
+        created_at=record.created_at,
+    )
+
+
+# ── Grad-CAM Endpoint ───────────────────────────────────────────────
+
+
+@router.get(
+    "/gradcam/{record_id}",
+    summary="Get Grad-CAM Overlay Image",
+    responses={
+        200: {"content": {"image/png": {}}, "description": "Grad-CAM overlay image."},
+        404: {"model": ErrorResponse},
+    },
+    tags=["Explainability"],
+)
+def get_gradcam(
+    record_id: int,
+    db: Session = Depends(get_db),
+):
+    """
+    Return the Grad-CAM overlay image file for a prediction.
+
+    Serves the overlay PNG directly as a file download. Returns 404
+    if the prediction record or overlay file does not exist.
+    """
+    logger.info("GET /gradcam/%d", record_id)
+    record = (
+        db.query(PredictionHistory)
+        .filter(PredictionHistory.id == record_id)
+        .first()
+    )
+    if record is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Prediction record {record_id} not found.",
+        )
+
+    if not record.overlay_path:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No Grad-CAM overlay available for prediction {record_id}.",
+        )
+
+    overlay_file = Path(record.overlay_path)
+    if not overlay_file.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Overlay file not found on disk for prediction {record_id}.",
+        )
+
+    return FileResponse(
+        path=str(overlay_file),
+        media_type="image/png",
+        filename=f"gradcam_overlay_{record_id}.png",
     )
 
 

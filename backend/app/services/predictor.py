@@ -65,8 +65,19 @@ class Predictor:
         num_ftrs = model.classifier.in_features
         model.classifier = nn.Linear(num_ftrs, settings.NUM_CLASSES)
 
-        # Load saved weights
-        state_dict = torch.load(model_path, map_location=self.device, weights_only=True)
+        # Load saved weights (handle both raw state_dict and full checkpoint dict)
+        checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
+
+        if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
+            state_dict = checkpoint["state_dict"]
+            logger.info(
+                "Loaded checkpoint (epoch=%s, best_val_acc=%.4f)",
+                checkpoint.get("epoch", "?"),
+                checkpoint.get("best_val_acc", 0.0),
+            )
+        else:
+            state_dict = checkpoint
+
         model.load_state_dict(state_dict)
 
         model.to(self.device)
