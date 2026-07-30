@@ -10,8 +10,8 @@ from collections.abc import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
+from app.core.config import settings
+from app.core.logger import logger
 
 
 def _build_engine_args(url: str) -> dict:

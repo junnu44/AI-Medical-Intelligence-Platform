@@ -20,8 +20,8 @@ from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from torchvision import transforms
 
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
+from app.core.config import settings
+from app.core.logger import logger
 
 
 class GradCAMService:

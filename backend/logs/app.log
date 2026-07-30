@@ -25,3 +25,152 @@
 2026-07-24 19:35:12 | INFO     | medical_ai | Gemini API key detected: ***5ftg
 2026-07-24 19:35:12 | INFO     | medical_ai | Application startup complete.
 2026-07-24 19:50:04 | INFO     | medical_ai | Application shutdown.
+2026-07-29 19:28:12 | INFO     | medical_ai | GeminiService configured (model=gemini-2.5-flash, key=***5ftg)
+2026-07-29 19:28:12 | INFO     | medical_ai | ============================================================
+2026-07-29 19:28:12 | INFO     | medical_ai | Starting Advanced AI Medical Intelligence Platform v3.0.0
+2026-07-29 19:28:12 | INFO     | medical_ai | ============================================================
+2026-07-29 19:28:12 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
+2026-07-29 19:28:12 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
+2026-07-29 19:28:12 | INFO     | medical_ai | Generated directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated
+2026-07-29 19:28:12 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
+2026-07-29 19:28:13 | INFO     | medical_ai | Loaded checkpoint (epoch=9, best_val_acc=0.9368)
+2026-07-29 19:28:13 | INFO     | medical_ai | Model loaded successfully on [cpu] in 0.557 seconds
+2026-07-29 19:28:13 | INFO     | medical_ai | Gemini API key detected: ***5ftg
+2026-07-29 19:28:13 | INFO     | medical_ai | Application startup complete.
+2026-07-29 19:29:46 | INFO     | medical_ai | Application shutdown.
+2026-07-29 19:30:14 | INFO     | medical_ai | GeminiService configured (model=gemini-2.5-flash, key=***5ftg)
+2026-07-29 19:30:15 | INFO     | medical_ai | ============================================================
+2026-07-29 19:30:15 | INFO     | medical_ai | Starting Advanced AI Medical Intelligence Platform v3.0.0
+2026-07-29 19:30:15 | INFO     | medical_ai | ============================================================
+2026-07-29 19:30:15 | INFO     | medical_ai | Database tables initialised (engine=sqlite:///./medical_ai.db)
+2026-07-29 19:30:15 | INFO     | medical_ai | Uploads directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads
+2026-07-29 19:30:15 | INFO     | medical_ai | Generated directory: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated
+2026-07-29 19:30:15 | INFO     | medical_ai | Loading model from: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\models\best_model.pth
+2026-07-29 19:30:16 | INFO     | medical_ai | Loaded checkpoint (epoch=9, best_val_acc=0.9368)
+2026-07-29 19:30:16 | INFO     | medical_ai | Model loaded successfully on [cpu] in 1.116 seconds
+2026-07-29 19:30:16 | INFO     | medical_ai | Gemini API key detected: ***5ftg
+2026-07-29 19:30:16 | INFO     | medical_ai | Application startup complete.
+2026-07-29 19:35:38 | INFO     | medical_ai | POST /predict — patient=Junaid Sheikh, age=22, gender=Male, file=gettyimages-89282400-612x612.jpg
+2026-07-29 19:35:38 | INFO     | medical_ai | Image saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads\418320cd06d84a7a86416c8aedead8f2.jpg (13925 bytes)
+2026-07-29 19:35:38 | INFO     | medical_ai | Preprocessed image: 418320cd06d84a7a86416c8aedead8f2.jpg → shape torch.Size([1, 3, 224, 224])
+2026-07-29 19:35:39 | INFO     | medical_ai | Prediction: PNEUMONIA (97.68%) — inference time: 1.521s
+2026-07-29 19:35:39 | INFO     | medical_ai | GradCAMService initialised (target_layer=features[-1])
+2026-07-29 19:35:42 | INFO     | medical_ai | Grad-CAM generated in 2.389s (class_idx=1, shape=(224, 224))
+2026-07-29 19:35:42 | INFO     | medical_ai | Heatmap saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated\heatmaps\b53551d98e6e4705b2ebb2400d442e54.png
+2026-07-29 19:35:42 | INFO     | medical_ai | Overlay saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated\overlays\9357fc70b9be49f6aaf1a4928da330ea.png
+2026-07-29 19:35:42 | INFO     | medical_ai | Grad-CAM artifacts saved: heatmap=b53551d98e6e4705b2ebb2400d442e54.png, overlay=9357fc70b9be49f6aaf1a4928da330ea.png
+2026-07-29 19:35:42 | INFO     | medical_ai | Sending prompt to Gemini (prediction=PNEUMONIA, confidence=97.68%)
+2026-07-29 19:35:43 | ERROR    | medical_ai | Gemini report generation failed after 0.965s: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.
+Traceback (most recent call last):
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\grpc_helpers.py", line 55, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 276, in __call__
+    response, ignored_call = self._with_call(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 331, in _with_call
+    return call.result(), call
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 447, in result
+    raise self
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 314, in continuation
+    response, call = self._thunk(new_method).with_call(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 1182, in with_call
+    return _end_unary_response_blocking(state, call, True, None)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 999, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.NOT_FOUND
+	details = "This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements."
+	debug_error_string = "NOT_FOUND:This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements."
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\llm\gemini_service.py", line 111, in generate_report
+    response = self.model.generate_content(prompt)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 835, in generate_content
+    response = rpc(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\gapic_v1\method.py", line 128, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 295, in retry_wrapped_func
+    return retry_target(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 157, in retry_target
+    next_sleep = _retry_error_helper(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_base.py", line 215, in _retry_error_helper
+    raise final_exc from source_exc
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 148, in retry_target
+    result = target()
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\grpc_helpers.py", line 57, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.NotFound: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.
+2026-07-29 19:35:43 | INFO     | medical_ai | Prediction saved: id=1
+2026-07-29 19:36:29 | INFO     | medical_ai | GET /history/1
+2026-07-29 19:36:29 | INFO     | medical_ai | GET /report/1
+2026-07-29 19:36:30 | INFO     | medical_ai | GET /gradcam/1
+2026-07-29 19:38:05 | INFO     | medical_ai | POST /predict — patient=daniel, age=35, gender=Male, file=istockphoto-174757583-612x612.jpg
+2026-07-29 19:38:05 | INFO     | medical_ai | Image saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\uploads\3536491b368e4896acf3bde4759bf091.jpg (52939 bytes)
+2026-07-29 19:38:05 | INFO     | medical_ai | Preprocessed image: 3536491b368e4896acf3bde4759bf091.jpg → shape torch.Size([1, 3, 224, 224])
+2026-07-29 19:38:06 | INFO     | medical_ai | Prediction: PNEUMONIA (100.00%) — inference time: 0.800s
+2026-07-29 19:38:06 | INFO     | medical_ai | GradCAMService initialised (target_layer=features[-1])
+2026-07-29 19:38:07 | INFO     | medical_ai | Grad-CAM generated in 1.367s (class_idx=1, shape=(224, 224))
+2026-07-29 19:38:07 | INFO     | medical_ai | Heatmap saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated\heatmaps\ef898a1469bc4942b3c94524c64c3a6c.png
+2026-07-29 19:38:07 | INFO     | medical_ai | Overlay saved: D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\generated\overlays\6ac631a5c3584ef8904c53266e1c286b.png
+2026-07-29 19:38:07 | INFO     | medical_ai | Grad-CAM artifacts saved: heatmap=ef898a1469bc4942b3c94524c64c3a6c.png, overlay=6ac631a5c3584ef8904c53266e1c286b.png
+2026-07-29 19:38:08 | INFO     | medical_ai | Sending prompt to Gemini (prediction=PNEUMONIA, confidence=100.00%)
+2026-07-29 19:38:08 | ERROR    | medical_ai | Gemini report generation failed after 0.594s: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.
+Traceback (most recent call last):
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\grpc_helpers.py", line 55, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 276, in __call__
+    response, ignored_call = self._with_call(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 331, in _with_call
+    return call.result(), call
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 447, in result
+    raise self
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_interceptor.py", line 314, in continuation
+    response, call = self._thunk(new_method).with_call(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 1182, in with_call
+    return _end_unary_response_blocking(state, call, True, None)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\grpc\_channel.py", line 999, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.NOT_FOUND
+	details = "This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements."
+	debug_error_string = "NOT_FOUND:This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements."
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\backend\app\llm\gemini_service.py", line 111, in generate_report
+    response = self.model.generate_content(prompt)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 835, in generate_content
+    response = rpc(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\gapic_v1\method.py", line 128, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 295, in retry_wrapped_func
+    return retry_target(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 157, in retry_target
+    next_sleep = _retry_error_helper(
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_base.py", line 215, in _retry_error_helper
+    raise final_exc from source_exc
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\retry\retry_unary.py", line 148, in retry_target
+    result = target()
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "D:\New folder\projects\GSD\Advanced-AI-Medical-Intelligence-Platform\venv\lib\site-packages\google\api_core\grpc_helpers.py", line 57, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.NotFound: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.
+2026-07-29 19:38:08 | INFO     | medical_ai | Prediction saved: id=2
+2026-07-29 19:38:16 | INFO     | medical_ai | GET /history/2
+2026-07-29 19:38:16 | INFO     | medical_ai | GET /report/2
+2026-07-29 19:38:16 | INFO     | medical_ai | GET /gradcam/2
+2026-07-29 19:38:29 | INFO     | medical_ai | GET /gradcam/2
+2026-07-29 19:39:03 | INFO     | medical_ai | GET /history
+2026-07-29 19:39:10 | INFO     | medical_ai | GET /gradcam/2
+2026-07-29 19:40:40 | INFO     | medical_ai | Application shutdown.

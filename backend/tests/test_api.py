@@ -13,8 +13,8 @@ import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
 
-from backend.app.database.database import Base, engine
-from backend.app.database.schemas import PredictionResult
+from app.database.database import Base, engine
+from app.database.schemas import PredictionResult
 
 
 # ── Fixtures ─────────────────────────────────────────────────────────
@@ -36,8 +36,8 @@ def client():
     We patch predictor.load_model to avoid needing the actual
     model weights file during testing.
     """
-    with patch("backend.app.services.predictor.predictor.load_model"):
-        from backend.app.main import app
+    with patch("app.services.predictor.predictor.load_model"):
+        from app.main import app
         with TestClient(app) as c:
             yield c
 

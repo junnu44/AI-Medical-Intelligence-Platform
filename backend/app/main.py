@@ -14,11 +14,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from backend.app.api.routes import router
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
-from backend.app.database.database import init_db
-from backend.app.services.predictor import predictor
+from app.api.routes import router
+from app.core.config import settings
+from app.core.logger import logger
+from app.database.database import init_db
+from app.services.predictor import predictor
 
 
 # ── Lifespan ─────────────────────────────────────────────────────────

@@ -14,11 +14,11 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
-from backend.app.database.database import get_db
-from backend.app.database.models import PredictionHistory
-from backend.app.database.schemas import (
+from app.core.config import settings
+from app.core.logger import logger
+from app.database.database import get_db
+from app.database.models import PredictionHistory
+from app.database.schemas import (
     DeleteResponse,
     ErrorResponse,
     GradCAMResponse,
@@ -27,10 +27,10 @@ from backend.app.database.schemas import (
     PredictionResponse,
     ReportResponse,
 )
-from backend.app.services.predictor import predictor
-from backend.app.xai.gradcam_service import GradCAMService
-from backend.app.xai.heatmap import heatmap_renderer
-from backend.app.llm.gemini_service import gemini_service
+from app.services.predictor import predictor
+from app.xai.gradcam_service import GradCAMService
+from app.xai.heatmap import heatmap_renderer
+from app.llm.gemini_service import gemini_service
 
 router = APIRouter()
 

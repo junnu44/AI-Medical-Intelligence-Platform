@@ -13,10 +13,10 @@ import torch
 import torch.nn as nn
 from torchvision import models
 
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
-from backend.app.database.schemas import PredictionResult
-from backend.app.services.image_processing import preprocess_image
+from app.core.config import settings
+from app.core.logger import logger
+from app.database.schemas import PredictionResult
+from app.services.image_processing import preprocess_image
 
 
 class Predictor:

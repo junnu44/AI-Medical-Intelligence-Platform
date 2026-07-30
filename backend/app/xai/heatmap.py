@@ -13,8 +13,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from backend.app.core.config import settings
-from backend.app.core.logger import logger
+from app.core.config import settings
+from app.core.logger import logger
 
 
 class HeatmapRenderer:
